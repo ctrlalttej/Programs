@@ -15,7 +15,7 @@ namespace Programs
         {
             //ThreadStart  thread=new ThreadStart(run);
 
-            //ThreadStart thread = run; //using direct method name
+            //ThreadStart thread = run; //using direct method name   
 
             ThreadStart thread = delegate //using ananyomous methods
             {
