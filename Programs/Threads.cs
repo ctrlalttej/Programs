@@ -2,39 +2,82 @@
 
 namespace Programs
 {
+    class MyThreads
+    {
+        string ThreadName { get; set; }
+
+        public int Count {  get; set; }
+
+        public MyThreads(string ThreadName,int Count)
+        {
+            this.ThreadName = ThreadName;
+            this.Count = Count;
+        }
+
+        public void Run()
+        {
+            Console.WriteLine($"{ThreadName} Started");
+            do
+            {
+                Console.WriteLine($"In {ThreadName}, Count is {Count}");
+                Count++;
+            } while (Count < 10);
+            Console.WriteLine($"{ThreadName} terminating");
+        }
+    }
     internal class Threads
     {
-        public static void test1()
+        public int Test1()
         {
-            for (int i = 0; i <= 100; i++)
-                Console.WriteLine($"test1 : " + i);
-            Console.WriteLine("Thread 1 Completed");
+            Console.WriteLine("Test 1 started");
+            for(int i=1;i<=10;i++)
+            {
+                Console.WriteLine("Test1 : "+i);
+                //Thread.Sleep(500);
+            }
+            Console.WriteLine("Test 1 ended");
+            return 1;
         }
 
-        public static void test2()
+        public void Test2()
         {
-            for (int i = 0; i <= 100; i++)
-                Console.WriteLine($"test2 : " + i);
-            Console.WriteLine("Thread 2 Completed");
+            Console.WriteLine("Test 2 Started");
+            for (int i = 1; i <= 10; i++)
+            {
+                Console.WriteLine("Test2 : " + i);
+                //Thread.Sleep(500);
+            }
+            Console.WriteLine("Test 2 Ended");
         }
-
-        public static void test3()
+        public void Test3(object n)
         {
-            for (int i = 0; i <= 100; i++)
-                Console.WriteLine($"test3 : " + i);
-            Console.WriteLine("Thread 3 Completed");
+            Console.WriteLine("Test 3 Started");
+            for (int i = 1; i <= (int)n; i++)
+            {
+                Console.WriteLine("Test3 : " + i);
+                Thread.Sleep(500);
+            }
+            Console.WriteLine("Test 3 ended");
         }
 
         public static void Main()
         {
-            Thread t1 = new Thread(test1);
-            Thread t2 = new Thread(test2);
-            Thread t3 = new Thread(test3);
+            Threads t = new Threads();
 
-            t1.Start();
-            t2.Start();
-            t3.Start();
-            Console.WriteLine("Main Thread Completed");
+
+
+            //ThreadStart threadStart = new ThreadStart(t.Test2);
+            //Thread thread = new Thread(threadStart);
+            //thread.Start();
+
+            //ParameterizedThreadStart parameterizedThreadStart= new ParameterizedThreadStart(t.Test3);
+            //Thread thread1 = new Thread(parameterizedThreadStart);
+            //thread1.Start(15);
+
+            //ThreadStart t = new ThreadStart();
+
+
+
         }
     }
 }

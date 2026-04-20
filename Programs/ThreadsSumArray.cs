@@ -8,17 +8,25 @@ namespace Programs
         object lockOn = new object(); // a private object to lock on
         public int SumIt(int[] nums)
         {
-            lock (this)
-            { // lock the entire method
+            //lock (this)
+            //{ // lock the entire method
+            Monitor.Enter(lockOn);
+            try
+            {
                 sum = 0; // reset sum
                 for (int i = 0; i < nums.Length; i++)
                 {
                     sum += nums[i];
-                    Console.WriteLine("Running total for " +Thread.CurrentThread.Name +" is " + sum);
+                    Console.WriteLine("Running total for " + Thread.CurrentThread.Name + " is " + sum);
                     Thread.Sleep(10); // allow task-switch
                 }
                 return sum;
             }
+            finally
+            {
+                Monitor.Exit(lockOn);
+            }
+           // }
         }
     }
     class MyThread
@@ -37,7 +45,7 @@ namespace Programs
         void Run()
         {
             Console.WriteLine(Thrd.Name + " starting.");
-            answer = sa.SumIt(a);
+            lock(sa) answer = sa.SumIt(a); //Insted of locking the piece of code we can lock the method itself
             Console.WriteLine("Sum for " + Thrd.Name +" is " + answer);
             Console.WriteLine(Thrd.Name + " terminating.");
         }
