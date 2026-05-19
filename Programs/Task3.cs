@@ -19,7 +19,18 @@ namespace Programs
             }).ContinueWith((res) =>
             {
                 return  res.Result + 100;
-            }); 
+            });
+
+
+            Task<string> task1 = Task.Run(() =>
+            {
+
+                return a + b;
+            }).ContinueWith((res) =>
+            {
+                return "res is "+res.Result;
+            });
+
 
             //ContinueWith works after Completin the task if any operations as to perform we can perform
 

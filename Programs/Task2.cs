@@ -11,10 +11,6 @@ namespace Programs
         public static void Main()
         {
             Console.WriteLine("Main Thread is started");
-            Task<int> task = Task.Run(() =>
-            {
-                return Sum(5);
-            });
 
             Task<List<Student>> student = Task.Run( () =>
             {
@@ -29,9 +25,6 @@ namespace Programs
 
                 return student1;
             });
-
-            Console.WriteLine($"task sum: {task.Result}");
-
             Console.WriteLine($"Student Name : {student.Result.First().Name} \n Student Id : {student.Result.First().Id}");
             Console.WriteLine("Main thread is completed");
             Console.Read();
